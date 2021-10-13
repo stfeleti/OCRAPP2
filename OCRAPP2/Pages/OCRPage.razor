@@ -1,0 +1,98 @@
+﻿@page "/"
+
+<h2 class="align-content-center justify-content-around">Welcome to our ocr page</h2>
+
+<div class="row wrapper p-5 m-3">
+    <div class="col-6 left p-3">
+        <div class="row">
+            <div class="col-5">
+                <p>Text Language</p>
+            </div>
+            <div>
+                <p class="border-secondary">@DetectedTextLanguage</p>
+            </div>
+        </div>
+        <textarea disabled class="form-control" rows="15" cols="15">@Result.DetectedText</textarea>
+        <hr />
+    </div>
+    <div class="col-5 right p-5 m-3">
+        <div class="image-container">
+            <img class="preview-image" src=@imagePreview>
+        </div>
+        <BlazorInputFile.InputFile OnChange="ViewImage" />
+        <p>@FileWarning</p>
+        <hr />
+        <div class="input-group">
+            <div class="input-group-append">
+                @if (loading)@if (loading)
+                    {
+                        <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-secondary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-success" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-danger" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    }
+            </div>
+            <button class="btn btn-secondary" @onclick="GetText">Exctract Text</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .preview-image {
+        max-height: 500px;
+        max-width: 500px;
+    }
+
+    .wrapper {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        height: 80vh;
+        box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    }
+
+    .image-container {
+        display: flex;
+        padding: 15px;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        border: 2px dashed;
+    }
+
+    textarea {
+        font-family: Serif Monaco Copperplate;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    }
+
+    body {
+        background-color: #50a3a2;
+        color: white;
+        font-family: 'DotGothic16', Monospace, monospace;
+    }
+    .left {
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    }
+    .right {
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    }
+    h2 {
+        margin: 0;
+        font-size: 2.5em;
+        margin-top: -0.6em;
+        color: #76ff03;
+        text-shadow: 0 0 0.05em #76ff03, 0 0 0.2em #00766c, 0 0 0.3em #25a59a;
+    }
+
+    button {
+        box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    }
+</style>
